@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bistu.shirospringboot.mapper.PermsMapper">
+
+    <select id="getUserPermsSetByUsername" resultType="com.bistu.shirospringboot.entity.Perms"
+            parameterType="java.lang.String">
+        select perms_name from perms where perms_id in (
+        select role_perms_perms_id from role_perms where role_perms_role_id in (
+        select user_role_role_id from user_role where user_role_user_id = (
+        select user_id from user where username = #{username})))
+    </select>
+</mapper>

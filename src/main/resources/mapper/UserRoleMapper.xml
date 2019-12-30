@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bistu.shirospringboot.mapper.UserRoleMapper">
+
+    <select id="getRoleByUserName" resultType="java.lang.String" parameterType="java.lang.String">
+        select rolename from role where role_id in (
+        select user_role_role_id from user_role where user_role_user_id = (
+        select user_id from user where username = #{username}))
+    </select>
+</mapper>
